@@ -1,12 +1,14 @@
-" let Vundle manage Vundle
-
-" required!
+" Required
 Bundle 'gmarik/vundle'
 
+" Plugins
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-rake'
 Bundle 'tpope/vim-bundler'
+Bundle 'tpope/vim-git'
+Bundle 'tpope/vim-haml'
+Bundle 'groenewege/vim-less'
 Bundle 'mileszs/ack.vim'
 Bundle 'pangloss/vim-javascript'
 Bundle 'mattn/gist-vim'
