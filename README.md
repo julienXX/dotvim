@@ -2,7 +2,11 @@ Installation
 ============
 
 Clone the repo:
-`$ git clone https://github.com/jhchabran/vimfiles.git ~/.vim`
+`$ git clone https://github.com/julienXX/dotvim.git ~/.vim`
+
+Create subdirectories:
+`$ mkdir ~/.vim/bundle`
+`$ mkdir ~/.vim/backup`
 
 Then install Vundle:
 `$ git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle`
