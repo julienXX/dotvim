@@ -34,8 +34,8 @@ set guioptions-=r
 set guioptions-=L
 
 " Default gui color scheme
-set background=light
-colorscheme solarized
+set background=dark
+colorscheme getafe
 
 " Default gui font
 set guifont=Menlo:h14
