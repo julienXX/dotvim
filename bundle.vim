@@ -35,6 +35,7 @@ Bundle 'sjl/gundo.vim'
 Bundle 'Townk/vim-autoclose'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdtree'
+Bundle 'gregsexton/gitv'
 
 " Colorschemes
 Bundle 'guicolorscheme.vim'
