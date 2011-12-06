@@ -234,3 +234,6 @@ let g:gist_open_browser_after_post = 1
 " Remove whitespaces
 map <f6> :%s/\s\+$//<esc>:nohl<CR>:w<CR>
 
+" Mapping for CtrlP
+map <D-t> :CtrlP
+
