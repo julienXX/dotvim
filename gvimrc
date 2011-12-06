@@ -21,5 +21,12 @@ if has("gui_macvim")
 
   " Automatically resize splits when resizing MacVim window
   autocmd VimResized * wincmd =
+
+
+  " Command-T for CtrlP
+  macmenu &File.New\ Tab key=<D-T>
+  map <D-t> :CtrlP<CR>
+  imap <D-t> <Esc>:CtrlP<CR>
+
 endif
 
