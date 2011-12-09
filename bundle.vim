@@ -34,6 +34,7 @@ Bundle 'sjl/gundo.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdtree'
 Bundle 'gregsexton/gitv'
+Bundle 'Lokaltog/vim-powerline'
 
 " Colorschemes
 Bundle 'guicolorscheme.vim'
