@@ -53,10 +53,6 @@ map <Leader>; :ZoomWin<CR>
 " Turn on jshint errors by default
 let g:JSLintHighlightErrorLine = 1
 
-" Gundo configuration
-nmap <F5> :GundoToggle<CR>
-imap <F5> <ESC>:GundoToggle<CR>
-
 " Remember last location in file
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
@@ -171,13 +167,13 @@ function! RunTests(filename)
   if match(a:filename, '\.feature$') != -1
       exec ":!bundle exec cucumber " . a:filename
   else
-      if filereadable("script/test")
-          exec ":!script/test " . a:filename
-      elseif filereadable("Gemfile")
-          exec ":!bundle exec rspec --color " . a:filename
-      else
-          exec ":!rspec --color " . a:filename
-      end
+    if filereadable("script/test")
+        exec ":!script/test " . a:filename
+    elseif filereadable("Gemfile")
+        exec ":!bundle exec rspec --color " . a:filename
+    else
+        exec ":!rspec --color " . a:filename
+    end
   end
 endfunction
 
@@ -188,17 +184,17 @@ endfunction
 
 function! RunTestFile(...)
   if a:0
-      let command_suffix = a:1
+    let command_suffix = a:1
   else
-      let command_suffix = ""
+    let command_suffix = ""
   endif
 
   " Run the tests for the previously-marked file.
   let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\)$') != -1
   if in_test_file
-      call SetTestFile()
+    call SetTestFile()
   elseif !exists("t:grb_test_file")
-      return
+    return
   end
   call RunTests(t:grb_test_file . command_suffix)
 endfunction
@@ -213,3 +209,8 @@ map <leader>T :call RunNearestTest()<cr>
 map <leader>a :call RunTests('')<cr>
 map <leader>c :w\|:!cucumber<cr>
 map <leader>w :w\|:!cucumber --profile wip<cr>
+
+" FuzzyFinder
+map <leader>f :FufFile<cr>
+map <leader>b :FufBuffer<cr>
+
