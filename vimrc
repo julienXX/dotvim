@@ -209,8 +209,3 @@ map <leader>T :call RunNearestTest()<cr>
 map <leader>a :call RunTests('')<cr>
 map <leader>c :w\|:!cucumber<cr>
 map <leader>w :w\|:!cucumber --profile wip<cr>
-
-" FuzzyFinder
-map <leader>f :FufFile<cr>
-map <leader>b :FufBuffer<cr>
-
