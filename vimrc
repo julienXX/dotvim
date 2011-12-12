@@ -40,7 +40,7 @@ set smartcase
 
 " Tab completion
 set wildmode=list:longest,list:full
-set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
+set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*,coverage/*
 
 " Without setting this, ZoomWin restores windows in a way that causes
 " equalalways behavior to be triggered the next time CommandT is used.
@@ -104,18 +104,8 @@ runtime! macros/matchit.vim
 " Show (partial) command in the status line
 set showcmd
 
-" Command-Shift-F for Ack
-map <D-F> :Ack<space>
-
-" Command-Option-ArrowKey to switch viewports
-map <D-M-Up> <C-w>k
-imap <D-M-Up> <Esc> <C-w>k
-map <D-M-Down> <C-w>j
-imap <D-M-Down> <Esc> <C-w>j
-map <D-M-Right> <C-w>l
-imap <D-M-Right> <Esc> <C-w>l
-map <D-M-Left> <C-w>h
-imap <D-M-Left> <C-w>h
+" Ack
+map <leader>f :Ack<space>
 
 " Adjust viewports to the same size
 map <Leader>= <C-w>=
@@ -137,7 +127,7 @@ set cursorline
 map <Leader>c :Rcontroller
 map <Leader>m :Rmodel
 
-map <C-h> :nohl<CR>
+map <leader>h :nohl<CR>
 imap <C-l> <Space>=><Space>
 map <C-s> <esc>:w<CR>
 imap <C-s> <esc>:w<CR>
@@ -209,3 +199,4 @@ map <leader>T :call RunNearestTest()<cr>
 map <leader>a :call RunTests('')<cr>
 map <leader>c :w\|:!cucumber<cr>
 map <leader>w :w\|:!cucumber --profile wip<cr>
+
