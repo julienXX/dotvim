@@ -146,14 +146,14 @@ function! RunTests(filename)
   :w
   :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
   if match(a:filename, '\.feature$') != -1
-      exec ":!bundle exec cucumber " . a:filename
+    exec ":!bundle exec cucumber " . a:filename
   else
     if filereadable("script/test")
-        exec ":!script/test " . a:filename
+      exec ":!script/test " . a:filename
     elseif filereadable("Gemfile")
-        exec ":!bundle exec rspec --color " . a:filename
+      exec ":!bundle exec rspec --color " . a:filename
     else
-        exec ":!rspec --color " . a:filename
+      exec ":!rspec --color " . a:filename
     end
   end
 endfunction
@@ -191,3 +191,12 @@ map <leader>a :call RunTests('')<cr>
 map <leader>c :w\|:!cucumber<cr>
 map <leader>w :w\|:!cucumber --profile wip<cr>
 
+" Disable arrow keys
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
+imap <up> <nop>
+imap <down> <nop>
+imap <left> <nop>
+imap <right> <nop>
