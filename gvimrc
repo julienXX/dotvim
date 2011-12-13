@@ -22,11 +22,26 @@ if has("gui_macvim")
   " Automatically resize splits when resizing MacVim window
   autocmd VimResized * wincmd =
 
-
   " Command-T for CtrlP
   macmenu &File.New\ Tab key=<D-T>
   map <D-t> :CtrlP<CR>
   imap <D-t> <Esc>:CtrlP<CR>
+
+  " Command-Shift-F for Ack
+  map <D-F> :Ack<space>
+
+  " Command-Option-ArrowKey to switch viewports
+  map <D-M-Up> <C-w>k
+  imap <D-M-Up> <Esc> <C-w>k
+  map <D-M-Down> <C-w>j
+  imap <D-M-Down> <Esc> <C-w>j
+  map <D-M-Right> <C-w>l
+  imap <D-M-Right> <Esc> <C-w>l
+  map <D-M-Left> <C-w>h
+  imap <D-M-Left> <C-w>h
+
+  " Command h to disable search highlight
+  map <C-h> :nohl<CR>
 
 endif
 
