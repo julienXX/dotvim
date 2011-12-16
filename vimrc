@@ -96,7 +96,7 @@ runtime! macros/matchit.vim
 set showcmd
 
 " Ack
-map <leader>f :Ack<space>
+map <leader>F :Ack<space>
 
 " Adjust viewports to the same size
 map <Leader>= <C-w>=
@@ -191,3 +191,13 @@ map <leader>a :call RunTests('')<cr>
 map <leader>c :w\|:!cucumber<cr>
 map <leader>w :w\|:!cucumber --profile wip<cr>
 
+" Restart server
+map <leader>R :!touch tmp/restart.txt<cr>
+
+" FuzzyFinder
+nmap <leader>f :FufFileWithCurrentBufferDir<CR>
+nmap <leader>b :FufBuffer<CR>
+nmap <leader>t :FufTaggedFile<CR>
+
+" Refresh ctags
+nmap <leader>ct :!ctags -R --extra=+f .<cr>
