@@ -118,10 +118,7 @@ set cursorline
 map <Leader>c :Rcontroller
 map <Leader>m :Rmodel
 
-map <leader>h :nohl<CR>
 imap <C-l> <Space>=><Space>
-map <C-s> <esc>:w<CR>
-imap <C-s> <esc>:w<CR>
 map <C-t> <esc>:tabnew<CR>
 map <C-x> <C-w>c
 
@@ -132,7 +129,7 @@ let g:gist_show_privates = 1
 let g:gist_open_browser_after_post = 1
 
 " Remove whitespaces
-map <f6> :%s/\s\+$//<esc>:nohl<CR>:w<CR>
+map <f6> :FixWhitespace<CR>
 
 " Status bar
 set laststatus=2
@@ -188,8 +185,6 @@ endfunction
 map <leader>t :call RunTestFile()<cr>
 map <leader>T :call RunNearestTest()<cr>
 map <leader>a :call RunTests('')<cr>
-map <leader>c :w\|:!cucumber<cr>
-map <leader>w :w\|:!cucumber --profile wip<cr>
 
 " Restart server
 map <leader>R :!touch tmp/restart.txt<cr>
@@ -197,7 +192,10 @@ map <leader>R :!touch tmp/restart.txt<cr>
 " FuzzyFinder
 nmap <leader>f :FufFileWithCurrentBufferDir<CR>
 nmap <leader>b :FufBuffer<CR>
-nmap <leader>t :FufTaggedFile<CR>
 
 " Refresh ctags
-nmap <leader>ct :!ctags -R --extra=+f .<cr>
+nmap <leader>ct :!/usr/local/bin/ctags -R --extra=+f .<cr>
+
+" Unset the last search pattern by hitting return again
+nnoremap <CR> :noh<CR><CR>
+
