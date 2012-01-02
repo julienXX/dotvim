@@ -13,7 +13,7 @@ if has("gui_macvim")
   set guioptions-=L
 
   " Default gui font
-  set guifont=Menlo:h13
+  set guifont=Inconsolata:h17
 
   " Default gui color scheme
   set background=dark
