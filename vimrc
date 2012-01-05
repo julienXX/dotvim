@@ -199,3 +199,5 @@ nmap <leader>ct :!/usr/local/bin/ctags -R --extra=+f .<cr>
 " Unset the last search pattern by hitting return again
 nnoremap <CR> :noh<CR><CR>
 
+" Additional mappings for vrackets
+set s:smatch = ["'", "\"", "|"]
