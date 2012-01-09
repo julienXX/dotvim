@@ -199,3 +199,12 @@ nmap <leader>ct :!/usr/local/bin/ctags -R --extra=+f .<cr>
 " Unset the last search pattern by hitting return again
 nnoremap <CR> :noh<CR><CR>
 
+" css-colors with SCSS files
+autocmd FileType sass,scss,stylus syn cluster sassCssAttributes add=@cssColors
+
+" NERDTree configuration
+let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
+let NERDTreeDirArrows = 1
+let NERDTreeMouseMode = 3
+map <Leader>n :NERDTreeToggle<CR>
+
