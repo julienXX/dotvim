@@ -13,7 +13,7 @@ if has("gui_macvim")
   set guioptions-=L
 
   " Default gui font
-  set guifont=Inconsolata:h17
+  set guifont=Menlo\ Regular:h14
 
   " Default gui color scheme
   set background=dark
@@ -40,8 +40,8 @@ if has("gui_macvim")
 
   " Command T forr PeepOpen
   macmenu &File.New\ Tab key=<D-T>
-  map <D-t> :PeepOpen<CR>
-  imap <D-t> <Esc>:PeepOpen<CR>
+  map <D-t> :CtrlP<CR>
+  imap <D-t> <Esc>:CtrlP<CR>
 
 endif
 
