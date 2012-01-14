@@ -96,7 +96,7 @@ cnoremap <c-a> <home>
 cnoremap <c-e> <end>
 
 " Yankring
-nnoremap <silent> <F6> :YRShow<cr>
+nnoremap <silent> <F5> :YRShow<cr>
 
 " Formatting, TextMate-style
 nnoremap Q gqip
