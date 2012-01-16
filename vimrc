@@ -34,7 +34,6 @@ set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*,coverage/*
 
 " Other options borrowed from Steve Losh
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
-set list
 set shell=/usr/local/bin/zsh
 set showbreak=↪
 set splitbelow
@@ -94,9 +93,6 @@ nnoremap <leader>s :%s//<left>
 " Emacs bindings in command line mode
 cnoremap <c-a> <home>
 cnoremap <c-e> <end>
-
-" Yankring
-nnoremap <silent> <F5> :YRShow<cr>
 
 " Formatting, TextMate-style
 nnoremap Q gqip
