@@ -10,7 +10,7 @@ let mapleader=","
 
 set number
 set ruler
-syntax on
+syntax enable
 set term=xterm-256color
 
 " Set encoding
@@ -34,7 +34,6 @@ set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*,coverage/*
 
 " Other options borrowed from Steve Losh
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
-set list
 set shell=/usr/local/bin/zsh
 set showbreak=↪
 set splitbelow
@@ -59,9 +58,6 @@ inoremap <c-e> <esc>A
 noremap H ^
 noremap L g_
 
-" Ack for the last search.
-nnoremap <silent> <leader>? :execute "Ack! '" . substitute(substitute(substitute(@/, "\\\\<", "\\\\b", ""), "\\\\>", "\\\\b", ""), "\\\\v", "", "") . "'"<CR>
-
 " Space to toggle folds.
 nnoremap <Space> za
 vnoremap <Space> za
@@ -84,10 +80,6 @@ endfunction " }}}
 command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
 nnoremap <leader>! :Shell
 
-" Change case
-nnoremap <C-u> gUiw
-inoremap <C-u> <esc>gUiwea
-
 " Substitute
 nnoremap <leader>s :%s//<left>
 
@@ -97,12 +89,6 @@ cnoremap <c-e> <end>
 
 " Yankring
 nnoremap <silent> <F5> :YRShow<cr>
-
-" Formatting, TextMate-style
-nnoremap Q gqip
-
-" Easier linewise reselection
-nnoremap <leader>V V`]
 
 " Select (charwise) the contents of the current line, excluding indentation.
 " Great for pasting Python lines into REPLs.
