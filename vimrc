@@ -292,6 +292,9 @@ nmap <leader>ct :!/usr/local/bin/ctags -R --extra=+f .<cr>
 " Unset the last search pattern by hitting return again
 nnoremap <CR> :noh<CR><CR>
 
+" Close QuickFix window in normal mode
+nnoremap <ESC> :ccl<CR>
+
 " css-colors with SCSS files
 autocmd FileType sass,scss,stylus syn cluster sassCssAttributes add=@cssColors
 
@@ -306,4 +309,10 @@ let g:tagbar_ctags_bin='/usr/local/bin/ctags'
 let g:tagbar_width=26
 noremap <silent> <Leader>y :TagbarToggle<cr>
 
-let g:Powerline_symbols = 'fancy'
+" Tabularize
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:\zs<CR>
+vmap <Leader>a: :Tabularize /:\zs<CR>
+
+" let g:Powerline_symbols = 'fancy'
