@@ -16,6 +16,16 @@ set term=xterm-256color
 " Set encoding
 set encoding=utf-8
 
+" Arrow keys in term
+nnoremap <Esc>A <up>
+nnoremap <Esc>B <down>
+nnoremap <Esc>C <right>
+nnoremap <Esc>D <left>
+inoremap <Esc>A <up>
+inoremap <Esc>B <down>
+inoremap <Esc>C <right>
+inoremap <Esc>D <left>
+
 " Whitespace stuff
 set tabstop=2
 set shiftwidth=2
