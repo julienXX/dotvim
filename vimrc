@@ -224,9 +224,6 @@ let g:gist_open_browser_after_post = 1
 " Remove whitespaces
 map <f6> :FixWhitespace<CR>
 
-" Status bar
-set laststatus=2
-
 " Leader Leader to switch between files
 nnoremap <leader><leader> <c-^>
 
@@ -315,27 +312,22 @@ vmap <Leader>a= :Tabularize /=<CR>
 nmap <Leader>a: :Tabularize /:\zs<CR>
 vmap <Leader>a: :Tabularize /:\zs<CR>
 
-" let g:Powerline_symbols = 'fancy'
 "statusline setup
 set statusline=%#DiffAdd#
 set statusline+=%#warningmsg#
-set statusline=%#DiffAdd#
-set statusline+=%f\ 
-set statusline+=%m      "modified flag
-set statusline+=%#LineNr# "switch to colors used for line number
-set statusline+=%#DiffAdd#  "switch back to normal
-set statusline+=%=      "left/right separator
-
-"display a warning if &paste is set
+set statusline+=%#DiffAdd#                         " switch back to normal
+set statusline+=%f\                                " modified flag
+set statusline+=%#LineNr#                         " switch back to normal
+set statusline+=%{fugitive#statusline()}           " git branch
+set statusline+=%#DiffAdd#                         " switch back to normal
+set statusline+=%m                                 " modified flag
+set statusline+=%r                                 " read-only flag
+set statusline+=%=                                 " left/right separator
 set statusline+=%#DiffChange#
-set statusline+=%{&paste?'[paste]':''}
-set statusline+=%#LineNr# "switch to colors used for line number
-set statusline+=%{fugitive#statusline()}
-set statusline+=%{StatuslineCurrentHighlight()}\ \ "current highlight
-set statusline+=%#DiffAdd# "switch to colors used for line number
-set statusline+=%c:     "cursor column
-set statusline+=%l/%L   "cursor line/total lines
-"set statusline+=\ %P    "percent through file
+set statusline+=%#LineNr#                          " switch to colors used for line number
+set statusline+=%{StatuslineCurrentHighlight()}\ " current highlight
+set statusline+=%c:                                " cursor column
+set statusline+=%l/%L                              " cursor line/total lines
 set laststatus=2
 
 "return the syntax highlight group under the cursor ''
