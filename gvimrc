@@ -38,7 +38,7 @@ if has("gui_macvim")
   " Command h to disable search highlight
   map <C-h> :nohl<CR>
 
-  " Command T forr PeepOpen
+  " Command T for CtrlP
   macmenu &File.New\ Tab key=<D-T>
   map <D-t> :CtrlP<CR>
   imap <D-t> <Esc>:CtrlP<CR>
