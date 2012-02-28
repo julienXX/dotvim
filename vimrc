@@ -290,7 +290,7 @@ nmap <leader>ct :!/usr/local/bin/ctags -R --extra=+f .<cr>
 nnoremap <CR> :noh<CR><CR>
 
 " Close QuickFix window in normal mode
-nnoremap <ESC> :ccl<CR>
+nnoremap <Leader>k :ccl<CR>
 
 " css-colors with SCSS files
 autocmd FileType sass,scss,stylus syn cluster sassCssAttributes add=@cssColors
