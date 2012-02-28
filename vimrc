@@ -301,10 +301,11 @@ let NERDTreeDirArrows = 1
 let NERDTreeMouseMode = 3
 map <Leader>n :NERDTreeToggle<CR>
 
-" Tagbar
+" CTags & Tagbar
 let g:tagbar_ctags_bin='/usr/local/bin/ctags'
 let g:tagbar_width=26
 noremap <silent> <Leader>y :TagbarToggle<cr>
+noremap <silent> <Leader>gt <C-]>
 
 " Tabularize
 nmap <Leader>a= :Tabularize /=<CR>
@@ -313,18 +314,11 @@ nmap <Leader>a: :Tabularize /:\zs<CR>
 vmap <Leader>a: :Tabularize /:\zs<CR>
 
 "statusline setup
-set statusline=%#DiffAdd#
-set statusline+=%#warningmsg#
-set statusline+=%#DiffAdd#                         " switch back to normal
 set statusline+=%f\                                " modified flag
-set statusline+=%#LineNr#                         " switch back to normal
 set statusline+=%{fugitive#statusline()}           " git branch
-set statusline+=%#DiffAdd#                         " switch back to normal
 set statusline+=%m                                 " modified flag
 set statusline+=%r                                 " read-only flag
 set statusline+=%=                                 " left/right separator
-set statusline+=%#DiffChange#
-set statusline+=%#LineNr#                          " switch to colors used for line number
 set statusline+=%{StatuslineCurrentHighlight()}\ " current highlight
 set statusline+=%c:                                " cursor column
 set statusline+=%l/%L                              " cursor line/total lines
@@ -339,3 +333,16 @@ function! StatuslineCurrentHighlight()
         return '[' . name . ']'
     endif
 endfunction
+
+" Reselect visual block after indent/outdent
+vnoremap < <gv
+vnoremap > >gv
+
+" Improve up/down movement on wrapped lines
+nnoremap j gj
+nnoremap k gk
+
+" Save and return to normal mode on FocusLost
+au FocusLost * :silent! wall                 " Save on FocusLost
+au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLost
+
