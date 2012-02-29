@@ -35,6 +35,12 @@ if has("gui_macvim")
   map <D-M-Left> <C-w>h
   imap <D-M-Left> <C-w>h
 
+  " Command-Shift-ArrowKey to switch tabs
+  map <D-S-Right> :tabnext<CR>
+  imap <D-S-Right> :tabnext<CR>
+  map <D-S-Left> :tabprevious<CR>
+  imap <D-S-Left> :tabprevious<CR>
+
   " Command h to disable search highlight
   map <C-h> :nohl<CR>
 
