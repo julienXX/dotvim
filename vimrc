@@ -1,5 +1,6 @@
 set nocompatible
 filetype off " required by Vundle plumbing
+set ttimeoutlen=50
 
 " Vundle
 set rtp+=~/.vim/bundle/vundle/
@@ -178,7 +179,7 @@ set modeline
 set modelines=10
 
 " Default color scheme
-set background=dark
+set background=light
 color hemisu
 
 " Directories for swp files
@@ -272,16 +273,16 @@ function! RunNearestTest()
   call RunTestFile(":" . spec_line_number)
 endfunction
 
-map <leader>t :call RunTestFile()<cr>
-map <leader>T :call RunNearestTest()<cr>
-map <leader>a :call RunTests('')<cr>
+" map <leader>t :call RunTestFile()<cr>
+" map <leader>T :call RunNearestTest()<cr>
+" map <leader>a :call RunTests('')<cr>
 
 " Restart server
 map <leader>R :!touch tmp/restart.txt<cr>
 
 " FuzzyFinder
 nmap <leader>f :FufFileWithCurrentBufferDir<CR>
-nmap <leader>b :FufBuffer<CR>
+" nmap <leader>b :FufBuffer<CR>
 
 " Refresh ctags
 nmap <leader>ct :!/usr/local/bin/ctags -R --extra=+f .<cr>
@@ -342,7 +343,19 @@ vnoremap > >gv
 nnoremap j gj
 nnoremap k gk
 
+" CtrlP
+map <Leader>p :CtrlP<cr>
+
 " Save and return to normal mode on FocusLost
 au FocusLost * :silent! wall                 " Save on FocusLost
 au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLost
 
+" disable arrow keys for the moment
+inoremap  <Up>     <NOP>
+inoremap  <Down>   <NOP>
+inoremap  <Left>   <NOP>
+inoremap  <Right>  <NOP>
+noremap   <Up>     <NOP>
+noremap   <Down>   <NOP>
+noremap   <Left>   <NOP>
+noremap   <Right>  <NOP>

@@ -46,6 +46,9 @@ Bundle 'majutsushi/tagbar'
 Bundle 'sickill/vim-pasta'
 Bundle 'vim-scripts/YankRing.vim'
 Bundle 'vim-scripts/AutoTag'
+Bundle 'jgdavey/vim-blockle'
+Bundle 'jgdavey/vim-turbux'
+Bundle 'jgdavey/tslime.vim'
 
 " Colors
 Bundle 'altercation/vim-colors-solarized'
