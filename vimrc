@@ -288,7 +288,7 @@ nmap <leader>f :FufFileWithCurrentBufferDir<CR>
 nmap <leader>ct :!/usr/local/bin/ctags -R --extra=+f .<cr>
 
 " Unset the last search pattern by hitting return again
-nnoremap <CR> :noh<CR><CR>
+nnoremap <Leader><space> :noh<CR>
 
 " Close QuickFix window in normal mode
 nnoremap <Leader>k :ccl<CR>
