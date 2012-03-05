@@ -1,6 +1,8 @@
 set nocompatible
 filetype off " required by Vundle plumbing
-set ttimeoutlen=50
+set notimeout
+set ttimeout
+set ttimeoutlen=10
 
 " Vundle
 set rtp+=~/.vim/bundle/vundle/
@@ -63,26 +65,15 @@ noremap L g_
 nnoremap <Space> za
 vnoremap <Space> za
 
-" Shell
-function! s:ExecuteInShell(command) " {{{
-    let command = join(map(split(a:command), 'expand(v:val)'))
-    let winnr = bufwinnr('^' . command . '$')
-    silent! execute  winnr < 0 ? 'botright vnew ' . fnameescape(command) : winnr . 'wincmd w'
-    setlocal buftype=nowrite bufhidden=wipe nobuflisted noswapfile nowrap nonumber
-    echo 'Execute ' . command . '...'
-    silent! execute 'silent %!'. command
-    silent! redraw
-    silent! execute 'au BufUnload <buffer> execute bufwinnr(' . bufnr('#') . ') . ''wincmd w'''
-    silent! execute 'nnoremap <silent> <buffer> <LocalLeader>r :call <SID>ExecuteInShell(''' . command . ''')<CR>:AnsiEsc<CR>'
-    silent! execute 'nnoremap <silent> <buffer> q :q<CR>'
-    silent! execute 'AnsiEsc'
-    echo 'Shell command ' . command . ' executed.'
-endfunction " }}}
-command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
-nnoremap <leader>! :Shell
+" Swap case
+nnoremap U gUiw
+inoremap <C-u> <esc>gUiwea"
 
 " Substitute
 nnoremap <leader>s :%s//<left>
+
+" Ack
+map <leader>a :Ack!
 
 " Emacs bindings in command line mode
 cnoremap <c-a> <home>
@@ -100,35 +91,6 @@ inoremap <C-B> <C-O>yiW<End>=<C-R>=<C-R>0<CR>
 
 " Sudo to write
 cmap w!! w !sudo tee % >/dev/null
-
-" Ack motions
-" Motions to Ack for things.  Works with pretty much everything, including:
-"   w, W, e, E, b, B, t*, f*, i*, a*, and custom text objects
-" Awesome.
-"
-" Note: If the text covered by a motion contains a newline it won't work.  Ack
-" searches line-by-line.
-
-nnoremap <silent> \a :set opfunc=<SID>AckMotion<CR>g@
-xnoremap <silent> \a :<C-U>call <SID>AckMotion(visualmode())<CR>
-
-function! s:CopyMotionForType(type)
-    if a:type ==# 'v'
-        silent execute "normal! `<" . a:type . "`>y"
-    elseif a:type ==# 'char'
-        silent execute "normal! `[v`]y"
-    endif
-endfunction
-
-function! s:AckMotion(type) abort
-    let reg_save = @@
-
-    call s:CopyMotionForType(a:type)
-
-    execute "normal! :Ack! --literal " . shellescape(@@) . "\<cr>"
-
-    let @@ = reg_save
-endfunction
 
 " Without setting this, ZoomWin restores windows in a way that causes
 " equalalways behavior to be triggered the next time CommandT is used.
@@ -192,9 +154,6 @@ runtime! macros/matchit.vim
 " Show (partial) command in the status line
 set showcmd
 
-" Ack
-map <leader>F :Ack<space>
-
 " Adjust viewports to the same size
 map <Leader>= <C-w>=
 imap <Leader>= <Esc><C-w>=
@@ -228,66 +187,11 @@ map <f6> :FixWhitespace<CR>
 " Leader Leader to switch between files
 nnoremap <leader><leader> <c-^>
 
-" Running tests
-function! RunTests(filename)
-  " Write the file and run tests for the given filename
-  :w
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  if match(a:filename, '\.feature$') != -1
-    exec ":!bundle exec cucumber " . a:filename
-  else
-    if filereadable("script/test")
-      exec ":!script/test " . a:filename
-    elseif filereadable("Gemfile")
-      exec ":!bundle exec rspec --color " . a:filename
-    else
-      exec ":!rspec --color " . a:filename
-    end
-  end
-endfunction
-
-function! SetTestFile()
-  " Set the spec file that tests will be run for.
-  let t:grb_test_file=@%
-endfunction
-
-function! RunTestFile(...)
-  if a:0
-    let command_suffix = a:1
-  else
-    let command_suffix = ""
-  endif
-
-  " Run the tests for the previously-marked file.
-  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\)$') != -1
-  if in_test_file
-    call SetTestFile()
-  elseif !exists("t:grb_test_file")
-    return
-  end
-  call RunTests(t:grb_test_file . command_suffix)
-endfunction
-
-function! RunNearestTest()
-  let spec_line_number = line('.')
-  call RunTestFile(":" . spec_line_number)
-endfunction
-
-" map <leader>t :call RunTestFile()<cr>
-" map <leader>T :call RunNearestTest()<cr>
-" map <leader>a :call RunTests('')<cr>
-
-" Restart server
-map <leader>R :!touch tmp/restart.txt<cr>
-
 " FuzzyFinder
 nmap <leader>f :FufFileWithCurrentBufferDir<CR>
 " nmap <leader>b :FufBuffer<CR>
 
-" Refresh ctags
-nmap <leader>ct :!/usr/local/bin/ctags -R --extra=+f .<cr>
-
-" Unset the last search pattern by hitting return again
+" Unset the last search pattern
 nnoremap <Leader><space> :noh<CR>
 
 " Close QuickFix window in normal mode
@@ -308,13 +212,7 @@ let g:tagbar_width=26
 noremap <silent> <Leader>y :TagbarToggle<cr>
 noremap <silent> <Leader>gt <C-]>
 
-" Tabularize
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a: :Tabularize /:\zs<CR>
-vmap <Leader>a: :Tabularize /:\zs<CR>
-
-"statusline setup
+" Statusline setup
 set statusline+=%f\                                " modified flag
 set statusline+=%{fugitive#statusline()}           " git branch
 set statusline+=%m                                 " modified flag
@@ -325,7 +223,7 @@ set statusline+=%c:                                " cursor column
 set statusline+=%l/%L                              " cursor line/total lines
 set laststatus=2
 
-"return the syntax highlight group under the cursor ''
+" Return the syntax highlight group under the cursor ''
 function! StatuslineCurrentHighlight()
     let name = synIDattr(synID(line('.'),col('.'),1),'name')
     if name == ''
@@ -344,7 +242,38 @@ nnoremap j gj
 nnoremap k gk
 
 " CtrlP
-map <Leader>p :CtrlP<cr>
+let g:ctrlp_extensions = ["tag"]
+let g:ctrlp_match_window_reversed = 0
+let g:ctrlp_map = '<leader>f'
+let g:CtrlPp_max_height = 100
+map <leader>gv :CtrlP app/views<cr>
+map <leader>gc :CtrlP app/controllers<cr>
+map <leader>gm :CtrlP app/models<cr>
+map <leader>gl :CtrlP lib<cr>
+map <leader>f :CtrlP<cr>
+map <leader>F :CtrlP %%<cr>
+let g:ctrlp_prompt_mappings = {
+      \ 'PrtSelectMove("j")':   ['<c-j>', '<down>', '<s-tab>'],
+      \ 'PrtSelectMove("k")':   ['<c-k>', '<up>', '<tab>'],
+      \ 'PrtHistory(-1)':       ['<c-n>'],
+      \ 'PrtHistory(1)':        ['<c-p>'],
+      \ 'ToggleFocus()':        ['<c-tab>'],
+      \ }
+
+" Scratch
+command! ScratchToggle call ScratchToggle()
+
+function! ScratchToggle() " {{{
+  if exists("w:is_scratch_window")
+    unlet w:is_scratch_window
+    exec "q"
+  else
+    exec "normal! :Sscratch\<cr>\<C-W>J:resize 13\<cr>"
+    let w:is_scratch_window = 1
+  endif
+endfunction " }}}
+
+nnoremap <silent> <leader><tab> :ScratchToggle<cr>
 
 " Save and return to normal mode on FocusLost
 au FocusLost * :silent! wall                 " Save on FocusLost
