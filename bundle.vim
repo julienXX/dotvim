@@ -49,6 +49,7 @@ Bundle 'vim-scripts/AutoTag'
 Bundle 'jgdavey/vim-blockle'
 Bundle 'jgdavey/vim-turbux'
 Bundle 'jgdavey/tslime.vim'
+Bundle 'davidoc/taskpaper.vim'
 
 " Colors
 Bundle 'altercation/vim-colors-solarized'
