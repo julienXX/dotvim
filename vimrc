@@ -73,7 +73,7 @@ inoremap <C-u> <esc>gUiwea"
 nnoremap <leader>s :%s//<left>
 
 " Ack
-map <leader>a :Ack!
+map <leader>a :Ack 
 
 " Emacs bindings in command line mode
 cnoremap <c-a> <home>
@@ -168,12 +168,11 @@ let g:JSLintHighlightErrorLine = 1
 set cursorline
 
 " Mappings
-map <Leader>c :Rcontroller
-map <Leader>m :Rmodel
+map <Leader>c :Rcontroller<cr>
+map <Leader>m :Rmodel<cr>
 
 imap <C-l> <Space>=><Space>
 map <C-t> <esc>:tabnew<CR>
-map <C-x> <C-w>c
 
 " Gist.vim
 let g:gist_clip_command = 'pbcopy'
@@ -244,14 +243,20 @@ nnoremap k gk
 " CtrlP
 let g:ctrlp_extensions = ["tag"]
 let g:ctrlp_match_window_reversed = 0
-let g:ctrlp_map = '<leader>f'
+let g:ctrlp_map = '<c-f>'
 let g:CtrlPp_max_height = 100
 map <leader>gv :CtrlP app/views<cr>
 map <leader>gc :CtrlP app/controllers<cr>
 map <leader>gm :CtrlP app/models<cr>
 map <leader>gl :CtrlP lib<cr>
-map <leader>f :CtrlP<cr>
+map <leader>b :CtrlPBuffer<cr>
+map <leader>f :CtrlPMRU<cr>
 map <leader>F :CtrlP %%<cr>
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\coverage$\|\.bundler$',
+  \ 'file': '\tags$\|\.rvmrc$\|\.rbenv$\|\.powrc$\|\.rspec$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
 let g:ctrlp_prompt_mappings = {
       \ 'PrtSelectMove("j")':   ['<c-j>', '<down>', '<s-tab>'],
       \ 'PrtSelectMove("k")':   ['<c-k>', '<up>', '<tab>'],
