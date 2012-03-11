@@ -14,7 +14,7 @@ let mapleader=","
 set number
 set ruler
 syntax enable
-set term=xterm-256color
+set term=screen-256color
 
 " Set encoding
 set encoding=utf-8
@@ -243,7 +243,7 @@ nnoremap k gk
 " CtrlP
 let g:ctrlp_extensions = ["tag"]
 let g:ctrlp_match_window_reversed = 0
-let g:ctrlp_map = '<c-f>'
+let g:ctrlp_map = '<c-p>'
 let g:CtrlPp_max_height = 100
 map <leader>gv :CtrlP app/views<cr>
 map <leader>gc :CtrlP app/controllers<cr>
@@ -293,3 +293,10 @@ noremap   <Up>     <NOP>
 noremap   <Down>   <NOP>
 noremap   <Left>   <NOP>
 noremap   <Right>  <NOP>
+
+" Rainbow
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+

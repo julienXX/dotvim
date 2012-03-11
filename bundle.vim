@@ -38,6 +38,7 @@ Bundle 'vim-scripts/AutoTag'
 Bundle 'jgdavey/vim-turbux'
 Bundle 'jgdavey/tslime.vim'
 Bundle 'davidoc/taskpaper.vim'
+Bundle 'kien/rainbow_parentheses.vim'
 
 " Colors
 Bundle 'altercation/vim-colors-solarized'
