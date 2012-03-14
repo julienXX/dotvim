@@ -41,6 +41,7 @@ Bundle 'jgdavey/vim-turbux'
 Bundle 'jgdavey/tslime.vim'
 Bundle 'davidoc/taskpaper.vim'
 Bundle 'kien/rainbow_parentheses.vim'
+Bundle 'vim-scripts/VimClojure'
 
 " Colors
 Bundle 'altercation/vim-colors-solarized'

@@ -247,6 +247,7 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlPMRU'
 let g:Ctrlp_max_height = 100
 let g:ctrlp_switch_buffer = 2
+let g:ctrlp_mruf_relative = 1
 map <leader>gv :CtrlP app/views<cr>
 map <leader>gc :CtrlP app/controllers<cr>
 map <leader>gm :CtrlP app/models<cr>
