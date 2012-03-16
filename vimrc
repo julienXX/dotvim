@@ -244,7 +244,7 @@ nnoremap k gk
 let g:ctrlp_extensions = ["tag"]
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlPMRU'
+let g:ctrlp_cmd = 'CtrlPMRUFiles'
 let g:Ctrlp_max_height = 100
 let g:ctrlp_switch_buffer = 2
 let g:ctrlp_mruf_relative = 1
