@@ -10,6 +10,7 @@ call vundle#rc()
 so ~/.vim/bundle.vim
 
 let mapleader=","
+let maplocalleader="="
 
 set number
 set ruler
@@ -78,9 +79,6 @@ map <leader>a :Ack
 " Emacs bindings in command line mode
 cnoremap <c-a> <home>
 cnoremap <c-e> <end>
-
-" Yankring
-nnoremap <silent> <F5> :YRShow<cr>
 
 " Select (charwise) the contents of the current line, excluding indentation.
 " Great for pasting Python lines into REPLs.
@@ -244,7 +242,7 @@ nnoremap k gk
 let g:ctrlp_extensions = ["tag"]
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlPMRUFiles'
+let g:ctrlp_cmd = 'CtrlP'
 let g:Ctrlp_max_height = 100
 let g:ctrlp_switch_buffer = 2
 let g:ctrlp_mruf_relative = 1

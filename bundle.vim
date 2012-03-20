@@ -43,6 +43,7 @@ Bundle 'davidoc/taskpaper.vim'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'vim-scripts/VimClojure'
 Bundle 'sjl/threesome.vim'
+Bundle 'sickill/vim-pasta'
 
 " Colors
 Bundle 'altercation/vim-colors-solarized'
