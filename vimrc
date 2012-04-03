@@ -215,20 +215,9 @@ set statusline+=%{fugitive#statusline()}           " git branch
 set statusline+=%m                                 " modified flag
 set statusline+=%r                                 " read-only flag
 set statusline+=%=                                 " left/right separator
-set statusline+=%{StatuslineCurrentHighlight()}\ " current highlight
 set statusline+=%c:                                " cursor column
 set statusline+=%l/%L                              " cursor line/total lines
 set laststatus=2
-
-" Return the syntax highlight group under the cursor ''
-function! StatuslineCurrentHighlight()
-    let name = synIDattr(synID(line('.'),col('.'),1),'name')
-    if name == ''
-        return ''
-    else
-        return '[' . name . ']'
-    endif
-endfunction
 
 " Reselect visual block after indent/outdent
 vnoremap < <gv
