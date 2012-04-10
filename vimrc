@@ -1,9 +1,3 @@
-set nocompatible
-filetype off " required by Vundle plumbing
-set notimeout
-set ttimeout
-set ttimeoutlen=10
-
 " Vundle
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -12,41 +6,242 @@ so ~/.vim/bundle.vim
 let mapleader=","
 let maplocalleader="="
 
-set number
-set ruler
-syntax enable
-set term=screen-256color
-" Prevent Vim from clobbering the scrollback buffer. See
-" " http://www.shallowsky.com/linux/noaltscreen.html
-set t_ti= t_te=
-
-" Set encoding
-set encoding=utf-8
-
-" Whitespace stuff
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" BASIC EDITING CONFIGURATION
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible
+" allow unsaved background buffers and remember marks/undo for them
+set hidden
+" remember more commands and search history
+set history=10000
 set expandtab
-
-" Searching
-set hlsearch
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set autoindent
+set number
+set showmatch
 set incsearch
-set ignorecase
-set smartcase
+set hlsearch
+" make searches case-sensitive only if they contain upper-case characters
+set ignorecase smartcase
+" highlight current line
+set cursorline
+set cmdheight=2
+set switchbuf=useopen
+set numberwidth=5
+set showtabline=2
+set winwidth=79
+set shell=bash
+" Prevent Vim from clobbering the scrollback buffer. See
+" http://www.shallowsky.com/linux/noaltscreen.html
+set t_ti= t_te=
+" keep more context when scrolling off the end of a buffer
+set scrolloff=3
+" Store temporary files in a central spot
+set backup
+set backupdir=~/.vim/backup
+set directory=~/.vim/backup
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+" display incomplete commands
+set showcmd
+" Enable highlighting for syntax
+syntax on
+" Enable file type detection.
+" Use the default filetype settings, so that mail gets 'tw' set to 72,
+" 'cindent' is on in C files, etc.
+" Also load indent files, to automatically do language-dependent indenting.
+filetype plugin indent on
+" use emacs-style tab completion when selecting files, etc
+set wildmode=longest,list
+" make tab completion for files/buffers act like bash
+set wildmenu
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" COLOR
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set t_Co=256 " 256 colors
+set background=dark
+color solarized
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" STATUS LINE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
+set laststatus=2
+set showcmd
+set showmode
+set cmdheight=1
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MISC KEY MAPS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <leader>y "*y
+" Move around splits with <c-hjkl>
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+" Insert a hash rocket with <c-l>
+imap <c-l> <space>=><space>
+" Can't be bothered to understand ESC vs <c-c> in insert mode
+imap <c-c> <esc>
+" Clear the search buffer when hitting return
+:nnoremap <CR> :nohlsearch<cr>
+nnoremap <leader><leader> <c-^>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ARROW KEYS ARE UNACCEPTABLE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <Left> :echo "no!"<cr>
+map <Right> :echo "no!"<cr>
+map <Up> :echo "no!"<cr>
+map <Down> :echo "no!"<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MULTIPURPOSE TAB KEY
+" Indent if we're at the beginning of a line. Else, do completion.
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <s-tab> <c-n>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" OPEN FILES IN DIRECTORY OF CURRENT FILE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
+map <leader>e :edit %%
+map <leader>v :view %%
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" RENAME CURRENT FILE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! RenameFile()
+    let old_name = expand('%')
+    let new_name = input('New file name: ', expand('%'), 'file')
+    if new_name != '' && new_name != old_name
+        exec ':saveas ' . new_name
+        exec ':silent !rm ' . old_name
+        redraw!
+    endif
+endfunction
+map <leader>n :call RenameFile()<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PROMOTE VARIABLE TO RSPEC LET
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! PromoteToLet()
+  :normal! dd
+  " :exec '?^\s*it\>'
+  :normal! P
+  :.s/\(\w\+\) = \(.*\)$/let(:\1) { \2 }/
+  :normal ==
+endfunction
+:command! PromoteToLet :call PromoteToLet()
+:map <leader>p :PromoteToLet<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" RUNNING TESTS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! RunTests(filename)
+    " Write the file and run tests for the given filename
+    :w
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
+    if match(a:filename, '\.feature$') != -1
+        exec ":!script/features " . a:filename
+    else
+        if filereadable("script/test")
+            exec ":!script/test " . a:filename
+        elseif filereadable("script/console")
+            exec ":!bundle exec spec --color " . a:filename
+        elseif filereadable("Gemfile")
+            exec ":!bundle exec rspec --color " . a:filename
+        else
+            exec ":!rspec --color " . a:filename
+        end
+    end
+endfunction
+
+function! SetTestFile()
+    " Set the spec file that tests will be run for.
+    let t:grb_test_file=@%
+endfunction
+
+function! RunTestFile(...)
+    if a:0
+        let command_suffix = a:1
+    else
+        let command_suffix = ""
+    endif
+
+    " Run the tests for the previously-marked file.
+    let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\)$') != -1
+    if in_test_file
+        call SetTestFile()
+    elseif !exists("t:grb_test_file")
+        return
+    end
+    call RunTests(t:grb_test_file . command_suffix)
+endfunction
+
+function! RunNearestTest()
+    let spec_line_number = line('.')
+    call RunTestFile(":" . spec_line_number . " -b")
+endfunction
+
+map <leader>t :call RunTestFile()<cr>
+map <leader>T :call RunNearestTest()<cr>
+map <leader>a :call RunTests('')<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" OpenChangedFiles COMMAND
+" Open a split for each dirty file in git
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! OpenChangedFiles()
+  only " Close all windows, unless they're modified
+  let status = system('git status -s | grep "^ \?\(M\|A\)" | cut -d " " -f 3')
+  let filenames = split(status, "\n")
+  exec "edit " . filenames[0]
+  for filename in filenames[1:]
+    exec "sp " . filename
+  endfor
+endfunction
+command! OpenChangedFiles :call OpenChangedFiles()
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" InsertTime COMMAND
+" Insert the current time
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+command! InsertTime :normal a<c-r>=strftime('%F %H:%M:%S.0 %z')<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Original Config
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tab completion
 set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*,coverage/*
 
 " Other options borrowed from Steve Losh
-set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
-set shell=/usr/local/bin/zsh
-set showbreak=↪
+" set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
+" set shell=/usr/local/bin/zsh
+" set showbreak=↪
 set splitbelow
 set splitright
-set fillchars=diff:⣿
-set noswapfile
+" set fillchars=diff:⣿
+" set noswapfile
 
 " Keep search matches in the middle of the window and pulse the line when moving
 " to them.
@@ -101,20 +296,17 @@ set noequalalways
 " ZoomWin configuration
 map <Leader>; :ZoomWin<CR>
 
-" Turn on jshint errors by default
-let g:JSLintHighlightErrorLine = 1
-
 " Remember last location in file
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
     \| exe "normal g'\"" | endif
 endif
 
-function s:setupWrapping()
-  set wrap
-  set wrapmargin=2
-  set textwidth=72
-endfunction
+" function s:setupWrapping()
+"   set wrap
+"   set wrapmargin=2
+"   set textwidth=72
+" endfunction
 
 " Thorfile, Rakefile, Vagrantfile and Gemfile are Ruby
 au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} set ft=ruby
@@ -127,33 +319,8 @@ au BufRead,BufNewFile *.txt call s:setupWrapping()
 " Less CSS
 au BufRead,BufNewFile *.less setfiletype less
 
-" allow backspacing over everything in insert mode
-set backspace=indent,eol,start
-
-" load the plugin and indent settings for the detected filetype
-filetype plugin indent on
-
-" Enable syntastic syntax checking
-let g:syntastic_enable_signs=1
-let g:syntastic_quiet_warnings=1
-
-" Use modeline overrides
-set modeline
-set modelines=10
-
-" Default color scheme
-set background=light
-color hemisu
-
-" Directories for swp files
-set backupdir=~/.vim/backup
-set directory=~/.vim/backup
-
 " % to bounce from do to end etc.
 runtime! macros/matchit.vim
-
-" Show (partial) command in the status line
-set showcmd
 
 " Adjust viewports to the same size
 map <Leader>= <C-w>=
@@ -162,9 +329,6 @@ imap <Leader>= <Esc><C-w>=
 " Don't beep
 set visualbell
 
-" Turn on jshint errors by default
-let g:JSLintHighlightErrorLine = 1
-
 " Highlight cursor line
 set cursorline
 
@@ -172,7 +336,6 @@ set cursorline
 map <Leader>c :Rcontroller<cr>
 map <Leader>m :Rmodel<cr>
 
-imap <C-l> <Space>=><Space>
 map <C-t> <esc>:tabnew<CR>
 
 " Gist.vim
@@ -186,10 +349,6 @@ map <f6> :FixWhitespace<CR>
 
 " Leader Leader to switch between files
 nnoremap <leader><leader> <c-^>
-
-" FuzzyFinder
-nmap <leader>f :FufFileWithCurrentBufferDir<CR>
-" nmap <leader>b :FufBuffer<CR>
 
 " Unset the last search pattern
 :nnoremap <CR> :nohlsearch<cr>
@@ -205,22 +364,6 @@ let NERDTreeIgnore=['\.pyc$', '\.rbc$', '\~$']
 let NERDTreeDirArrows = 1
 let NERDTreeMouseMode = 3
 map <Leader>n :NERDTreeToggle<CR>
-
-" CTags & Tagbar
-let g:tagbar_ctags_bin='/usr/local/bin/ctags'
-let g:tagbar_width=26
-noremap <silent> <Leader>y :TagbarToggle<cr>
-noremap <silent> <Leader>gt <C-]>
-
-" Statusline setup
-set statusline+=%f\                                " modified flag
-set statusline+=%{fugitive#statusline()}           " git branch
-set statusline+=%m                                 " modified flag
-set statusline+=%r                                 " read-only flag
-set statusline+=%=                                 " left/right separator
-set statusline+=%c:                                " cursor column
-set statusline+=%l/%L                              " cursor line/total lines
-set laststatus=2
 
 " Reselect visual block after indent/outdent
 vnoremap < <gv
@@ -278,89 +421,9 @@ nnoremap <silent> <leader><tab> :ScratchToggle<cr>
 au FocusLost * :silent! wall                 " Save on FocusLost
 au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLost
 
-" disable arrow keys for the moment
-inoremap  <Up>     <NOP>
-inoremap  <Down>   <NOP>
-inoremap  <Left>   <NOP>
-inoremap  <Right>  <NOP>
-noremap   <Up>     <NOP>
-noremap   <Down>   <NOP>
-noremap   <Left>   <NOP>
-noremap   <Right>  <NOP>
-
 " Rainbow
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
-
-" Rename file
-function! RenameFile()
-    let old_name = expand('%')
-    let new_name = input('New file name: ', expand('%'))
-    if new_name != '' && new_name != old_name
-        exec ':saveas ' . new_name
-        exec ':silent !rm ' . old_name
-        redraw!
-    endif
-endfunction
-map <localleader>n :call RenameFile()<cr>
-
-" Running tests
-function! RunTests(filename)
-    " Write the file and run tests for the given filename
-    :w
-    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-    :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-    if match(a:filename, '\.feature$') != -1
-        exec ":!script/features " . a:filename
-    else
-        if filereadable("script/test")
-            exec ":!script/test " . a:filename
-        elseif filereadable("script/console")
-            exec ":!bundle exec spec --color " . a:filename
-        elseif filereadable("Gemfile")
-            exec ":!bundle exec rspec --color " . a:filename
-        else
-            exec ":!rspec --color " . a:filename
-        end
-    end
-endfunction
-
-function! SetTestFile()
-    " Set the spec file that tests will be run for.
-    let t:grb_test_file=@%
-endfunction
-
-function! RunTestFile(...)
-    if a:0
-        let command_suffix = a:1
-    else
-        let command_suffix = ""
-    endif
-
-    " Run the tests for the previously-marked file.
-    let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\)$') != -1
-    if in_test_file
-        call SetTestFile()
-    elseif !exists("t:grb_test_file")
-        return
-    end
-    call RunTests(t:grb_test_file . command_suffix)
-endfunction
-
-function! RunNearestTest()
-    let spec_line_number = line('.')
-    call RunTestFile(":" . spec_line_number . " -b")
-endfunction
-
-map <localleader>t :call RunTestFile()<cr>
-map <localleader>T :call RunNearestTest()<cr>
-map <localleader>a :call RunTests('')<cr>
-map <localleader>c :w\|:!script/features<cr>
-map <localleader>w :w\|:!script/features --profile wip<cr>
 
