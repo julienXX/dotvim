@@ -16,4 +16,7 @@ Make sure vim finds the vimrc file by either symlinking it:
 
 Run :BundleInstall to tell Vundle to bundle all plugins
 
-Mostly inspired by jhchabran vimfiles https://github.com/jhchabran/vimfiles
+Mostly inspired by these people vimfiles:
+- Jean Hadrien Chabran https://github.com/jhchabran/vimfiles
+- Steve Losh https://github.com/sjl/dotfiles
+- Gary Bernhardt https://github.com/garybernhardt/dotfiles
