@@ -99,6 +99,9 @@ map <Right> :echo "no!"<cr>
 map <Up> :echo "no!"<cr>
 map <Down> :echo "no!"<cr>
 
+" Tabs navigation
+map <localleader><tab> :tabn<cr>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
 " Indent if we're at the beginning of a line. Else, do completion.
@@ -272,7 +275,7 @@ inoremap <C-u> <esc>gUiwea"
 nnoremap <leader>s :%s//<left>
 
 " Ack
-map <leader>a :Ack 
+map <localleader>a :Ack 
 
 " Emacs bindings in command line mode
 cnoremap <c-a> <home>
@@ -301,12 +304,6 @@ if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
     \| exe "normal g'\"" | endif
 endif
-
-" function s:setupWrapping()
-"   set wrap
-"   set wrapmargin=2
-"   set textwidth=72
-" endfunction
 
 " Thorfile, Rakefile, Vagrantfile and Gemfile are Ruby
 au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} set ft=ruby
@@ -426,4 +423,7 @@ au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
+
+" CTags
+noremap <silent> <Leader>gt <C-]>
 
