@@ -41,10 +41,6 @@ Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'vim-scripts/VimClojure'
 Bundle 'sjl/threesome.vim'
 Bundle 'ecomba/vim-ruby-refactoring'
-Bundle 'Lokaltog/vim-easymotion'
 
 " Colors
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'julienXX/Hemisu'
-Bundle 'julienXX/getafe'
-Bundle 'endel/vim-github-colorscheme'
