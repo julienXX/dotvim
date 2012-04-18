@@ -376,6 +376,18 @@ let g:ctrlp_prompt_mappings = {
       \ 'ToggleFocus()':        ['<c-tab>'],
       \ }
 
+" Command-T
+map <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
+map <leader>gc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
+map <leader>gm :CommandTFlush<cr>\|:CommandT app/models<cr>
+map <leader>gl :CommandTFlush<cr>\|:CommandT lib<cr>
+map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
+map <leader>b :CommandTFlush<cr>\|:CommandTBuffer<cr>
+map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>
+
+let g:CommandTMaxHeight = 15
+let g:CommandTCancelMap = '<Esc>'
+
 " Scratch
 command! ScratchToggle call ScratchToggle()
 
