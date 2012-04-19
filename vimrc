@@ -350,7 +350,6 @@ map <Leader>n :NERDTreeToggle<CR>
 " CtrlP
 let g:ctrlp_extensions = ["tag"]
 let g:ctrlp_match_window_reversed = 0
-let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:Ctrlp_max_height = 100
 let g:ctrlp_switch_buffer = 2
@@ -360,8 +359,7 @@ map <leader>gc :CtrlP app/controllers<cr>
 map <leader>gm :CtrlP app/models<cr>
 map <leader>gl :CtrlP lib<cr>
 map <leader>b :CtrlPBuffer<cr>
-map <leader>f :CtrlPMRU<cr>
-map <leader>f :CtrlPMRU<cr>
+map <leader>f :CtrlP<cr>
 map <leader>F :CtrlP %%<cr>
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\coverage$\|\.bundler$',
@@ -375,18 +373,6 @@ let g:ctrlp_prompt_mappings = {
       \ 'PrtHistory(1)':        ['<c-p>'],
       \ 'ToggleFocus()':        ['<c-tab>'],
       \ }
-
-" Command-T
-map <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
-map <leader>gc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
-map <leader>gm :CommandTFlush<cr>\|:CommandT app/models<cr>
-map <leader>gl :CommandTFlush<cr>\|:CommandT lib<cr>
-map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
-map <leader>b :CommandTFlush<cr>\|:CommandTBuffer<cr>
-map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>
-
-let g:CommandTMaxHeight = 15
-let g:CommandTCancelMap = '<Esc>'
 
 " Scratch
 command! ScratchToggle call ScratchToggle()
@@ -402,9 +388,6 @@ function! ScratchToggle() " {{{
 endfunction " }}}
 
 nnoremap <silent> <leader><tab> :ScratchToggle<cr>
-
-" Easymotion
-let g:EasyMotion_leader_key = '<localleader>'
 
 " }}}
 
