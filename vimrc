@@ -389,8 +389,5 @@ endfunction " }}}
 
 nnoremap <silent> <leader><tab> :ScratchToggle<cr>
 
-" DelimitMate
-let delimitMate_no_esc_mapping = 1
-
 " }}}
 
