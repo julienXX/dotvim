@@ -389,5 +389,13 @@ endfunction " }}}
 
 nnoremap <silent> <leader><tab> :ScratchToggle<cr>
 
-" }}}
+" VimClojure
+let vimclojure#FuzzyIndent=1
+let vimclojure#HighlightBuiltins=1
+let vimclojure#HighlightContrib=1
+let vimclojure#DynamicHighlighting=1
+let vimclojure#ParenRainbow=0
+let vimclojure#WantNailgun=1
+let vimclojure#NailgunClient = "/usr/local/bin/ng"
 
+" }}}
