@@ -354,10 +354,10 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:Ctrlp_max_height = 100
 let g:ctrlp_switch_buffer = 2
 let g:ctrlp_mruf_relative = 1
-map <leader>fv :CtrlP app/views<cr>
-map <leader>fc :CtrlP app/controllers<cr>
-map <leader>fm :CtrlP app/models<cr>
-map <leader>fl :CtrlP lib<cr>
+map <leader>gv :CtrlP app/views<cr>
+map <leader>gc :CtrlP app/controllers<cr>
+map <leader>gm :CtrlP app/models<cr>
+map <leader>gl :CtrlP lib<cr>
 map <leader>b :CtrlPBuffer<cr>
 map <leader>f :CtrlP<cr>
 map <leader>F :CtrlP %%<cr>
