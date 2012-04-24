@@ -168,7 +168,7 @@ map <localleader><tab> :tabnext<cr>
 map <C-t> <esc>:tabnew<CR>
 
 " CTags
-noremap <silent> <Leader>gt <C-]>
+noremap <silent> gt <C-]>
 
 " }}}
 
