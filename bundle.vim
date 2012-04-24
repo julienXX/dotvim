@@ -38,6 +38,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'vim-scripts/AutoTag'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'vim-scripts/VimClojure'
+Bundle 'jgdavey/tslime.vim'
 Bundle 'sjl/threesome.vim'
 Bundle 'ecomba/vim-ruby-refactoring'
 
