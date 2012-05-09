@@ -42,7 +42,7 @@ set numberwidth=5
 set showtabline=2
 set winwidth=79
 set shell=bash
-set clipboard=unnamed
+" set clipboard=unnamed
 " Prevent Vim from clobbering the scrollback buffer. See
 " http://www.shallowsky.com/linux/noaltscreen.html
 set t_ti= t_te=
@@ -64,6 +64,8 @@ set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*,coverage/*
 set wildmenu
 " Don't beep
 set visualbell
+" Ctags for completion
+set complete=.,t
 " Save and return to normal mode on FocusLost
 au FocusLost * :silent! wall                 " Save on FocusLost
 au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLost
@@ -397,5 +399,19 @@ let vimclojure#DynamicHighlighting=1
 let vimclojure#ParenRainbow=0
 let vimclojure#WantNailgun=1
 let vimclojure#NailgunClient = "/usr/local/bin/ng"
+
+" }}}
+
+" Surrounds {{{
+
+" Surround a word with #{ruby interpolation}
+map ,# bi#{<esc>eli}<esc>
+vmap ,# c#{<C-R>"}<ESC>"}
+" Surround a word with double quotes
+map ," ysiw"
+vmap ," c"<C-R>""<ESC>
+" Surround a word with quotes
+map ,' ysiw'
+vmap ,' c'<C-R>''<ESC>
 
 " }}}
