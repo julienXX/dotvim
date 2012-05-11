@@ -174,21 +174,6 @@ noremap <silent> gt <C-]>
 
 " }}}
 
-" Tab key {{{
-
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <s-tab> <c-n>
-
-" }}}
-
 " Open in currentdirectory {{{
 
 cnoremap %% <C-R>=expand('%:h').'/'<cr>

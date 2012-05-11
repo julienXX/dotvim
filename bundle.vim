@@ -37,6 +37,7 @@ Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'vim-scripts/VimClojure'
 Bundle 'jgdavey/tslime.vim'
 Bundle 'ecomba/vim-ruby-refactoring'
+Bundle 'ervandew/supertab'
 
 " Colors
 Bundle 'altercation/vim-colors-solarized'
