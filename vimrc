@@ -35,7 +35,7 @@ set showmatch
 set incsearch
 set hlsearch
 set ignorecase smartcase
-set cursorline
+set nocursorline
 set cmdheight=2
 set switchbuf=useopen
 set numberwidth=5
