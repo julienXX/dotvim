@@ -16,11 +16,11 @@ if has("gui_macvim")
   set guioptions-=L
 
   " Default gui font
-  set guifont=Anonymous\ Pro:h16
+  set guifont=Menlo:h15
 
   " Default gui color scheme
   set background=dark
-  colorscheme solarized
+  colorscheme Tomorrow-Night
 
   " Automatically resize splits when resizing MacVim window
   autocmd VimResized * wincmd =
