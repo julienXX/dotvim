@@ -1,4 +1,7 @@
 if has("gui_macvim")
+  " Cursor line
+  set cursorline
+
   " Fullscreen takes up entire screen
   set fuoptions=maxhorz,maxvert
 
@@ -13,11 +16,11 @@ if has("gui_macvim")
   set guioptions-=L
 
   " Default gui font
-  set guifont=Anonymous\ Pro:h14
+  set guifont=Anonymous\ Pro:h16
 
   " Default gui color scheme
-  set background=light
-  colorscheme hemisu
+  set background=dark
+  colorscheme solarized
 
   " Automatically resize splits when resizing MacVim window
   autocmd VimResized * wincmd =
@@ -25,29 +28,11 @@ if has("gui_macvim")
   " Command-Shift-F for Ack
   map <D-F> :Ack<space>
 
-  " Command-Option-ArrowKey to switch viewports
-  map <D-M-Up> <C-w>k
-  imap <D-M-Up> <Esc> <C-w>k
-  map <D-M-Down> <C-w>j
-  imap <D-M-Down> <Esc> <C-w>j
-  map <D-M-Right> <C-w>l
-  imap <D-M-Right> <Esc> <C-w>l
-  map <D-M-Left> <C-w>h
-  imap <D-M-Left> <C-w>h
-
   " Command-Shift-ArrowKey to switch tabs
   map <D-S-Right> :tabnext<CR>
   imap <D-S-Right> :tabnext<CR>
   map <D-S-Left> :tabprevious<CR>
   imap <D-S-Left> :tabprevious<CR>
-
-  " Command h to disable search highlight
-  map <C-h> :nohl<CR>
-
-  " Command T for CtrlP
-  macmenu &File.New\ Tab key=<D-T>
-  map <D-t> :CtrlP<CR>
-  imap <D-t> <Esc>:CtrlP<CR>
 
 endif
 
@@ -81,7 +66,7 @@ function s:CdIfDirectory(directory)
 
   " Allows reading from stdin
   " ex: git diff | mvim -R -
-  if strlen(a:directory) == 0 
+  if strlen(a:directory) == 0
     return
   endif
 
